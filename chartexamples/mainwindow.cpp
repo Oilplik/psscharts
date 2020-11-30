@@ -78,8 +78,10 @@ MainWindow::MainWindow(QWidget *parent) :
     m_barChart = new PssCharts::BarChart(this);
     m_pieChart = new PssCharts::PieChart(this);
     m_legend = new LegendWidget(this);
-    ui->hlayoutMain->addLayout(ui->formLayout, 0);
-    ui->hlayoutMain->addLayout(ui->chartLayout, 1);
+//    ui->hlayoutMain->addLayout(ui->formLayout, 0);
+//    ui->hlayoutMain->addLayout(ui->chartLayout, 1);
+    ui->gridLayout->addLayout(ui->formLayout, 0, 0, -1, -1);
+    ui->gridLayout->addLayout(ui->chartLayout, 1, 1, 2, 5);
     QSize sizeScreen = QGuiApplication::screens()[0]->size();
     if (sizeScreen.height() > sizeScreen.width()) {
         ui->formLayout->addRow(m_lineChart);
@@ -92,6 +94,9 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->hlayoutMain->addWidget(m_barChart, /*stretch*/1);
         ui->hlayoutMain->addWidget(m_pieChart, /*stretch*/1);
     }
+    ui->formLayout->setSizeConstraint(QLayout::SetMinimumSize);
+    m_barChart->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    m_legend->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     m_chartType = PssCharts::ChartType::PIE;
 
     setWindowTitle(QString("PssCharts %1").arg(m_lineChart->VersionString()));

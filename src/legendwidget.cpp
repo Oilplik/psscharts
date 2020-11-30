@@ -12,6 +12,7 @@ LegendWidget::LegendWidget(QWidget *parent) :
     ui(new Ui::LegendWidget)
 {
     ui->setupUi(this);
+    this->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     m_strTitle = "Chart Legend";
     m_topTitleHeight = -1;
     m_nLabelSize = 11;
